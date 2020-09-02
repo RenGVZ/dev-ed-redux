@@ -1,32 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import allReducers from './reducers';
-import loggedReducer from './reducers/isLogged';
-import { logIn } from './actions';
-import { increment } from './actions';
-import { decrement } from './actions';
+import { increment, decrement, logIn } from './actions';
 
 const App = () => {
-  const counter = useSelector(state => state.counter);
-  const loggedIn = useSelector(state => state.loggedIn);
-  const dispatch = useDispatch()
-  
-  const handlePlus = () => {
-    dispatch(increment());
-  }
-  const handleMinus = () => {
-    dispatch(decrement());
-  }
+  const counter = useSelector(state => state.counter)
+  const dispatch = useDispatch();
+  const loggedIn = useSelector(state => state.logIn)
   return (
     <div>
       <h1>{counter}</h1>
-      <button 
-        onClick={() => dispatch(logIn())}>
-        Log In
-      </button>
-      <button onClick={handlePlus}>+</button>
-      <button onClick={handleMinus}>-</button>
-      <h1>{loggedIn ? "You are Logged in" : "You are not logged in"}</h1>
+      <button onClick={() => dispatch(increment(5))}>+</button>
+      <button onClick={() => dispatch(decrement(5))}>-</button>
+      <button onClick={() => dispatch(logIn())}>{ loggedIn ? "Log Out" : "Log In" }</button>
+      <h1>{ loggedIn ? "You are logged IN" : "You are logget OUT" }</h1>
     </div>
   )
 }
